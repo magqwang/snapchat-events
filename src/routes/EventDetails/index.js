@@ -1,5 +1,10 @@
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { EventContext } from "../../contexts/event.context";
+
 import {
   Box,
+  IconButton,
   List,
   ListItem,
   ListItemIcon,
@@ -9,10 +14,24 @@ import {
 } from "@mui/material";
 import BirthdayCake from "../../assets/Birthday-cake.png";
 import { ImCalendar, ImLocation } from "react-icons/im";
+import { AiOutlineRight } from "react-icons/ai";
 
-const EventDetails = ({ eventDetails }) => {
+const EventDetails = () => {
+  const navigate = useNavigate();
+  const { eventDetails } = useContext(EventContext);
+
   return (
-    <Stack spacing={2} textAlign="left" backGroundColor="ede5ff">
+    <Stack
+      spacing={2}
+      sx={{
+        textAlign: "left",
+        bgColor: "#dddddd",
+        position: "absolute",
+        left: 0,
+        right: 0,
+        top: 0,
+      }}
+    >
       <img src={BirthdayCake} alt="event" style={{ width: "100%" }} />
       <Typography
         sx={{
@@ -21,6 +40,7 @@ const EventDetails = ({ eventDetails }) => {
           color: "#240D57",
           lineHeight: "32px",
           textAign: "left",
+          px: "20px",
         }}
       >
         {eventDetails.eventName}
@@ -32,13 +52,25 @@ const EventDetails = ({ eventDetails }) => {
           color: "#828282",
           lineHeight: "16px",
           textAign: "left",
+          px: "20px",
         }}
       >
         Hosted by {eventDetails.hostName}
       </Typography>
-      <Box sx={{ width: "100%", px: "14px" }}>
+      <Box sx={{ width: "100%", px: "34px" }}>
         <List>
-          <ListItem>
+          <ListItem
+            secondaryAction={
+              <IconButton
+                edge="end"
+                aria-label="edit"
+                sx={{ color: "#BDBDBD" }}
+                onClick={() => navigate("/create")}
+              >
+                <AiOutlineRight />
+              </IconButton>
+            }
+          >
             <ListItemIcon sx={{ color: "#8456EC" }}>
               <ImCalendar />
             </ListItemIcon>
@@ -69,7 +101,18 @@ const EventDetails = ({ eventDetails }) => {
               }
             />
           </ListItem>
-          <ListItem>
+          <ListItem
+            secondaryAction={
+              <IconButton
+                edge="end"
+                aria-label="edit"
+                sx={{ color: "#BDBDBD" }}
+                onClick={() => navigate("/create")}
+              >
+                <AiOutlineRight />
+              </IconButton>
+            }
+          >
             <ListItemIcon sx={{ color: "#8456EC" }}>
               <ImLocation />
             </ListItemIcon>
@@ -95,7 +138,7 @@ const EventDetails = ({ eventDetails }) => {
                     lineHeight: "16px",
                   }}
                 >
-                  {eventDetails.suburb} {eventDetails.state}
+                  {eventDetails.suburb} {eventDetails.state}{" "}
                   {eventDetails.postcode}
                 </Typography>
               }

@@ -1,8 +1,11 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { EventContext } from "../../contexts/event.context";
+import { Box, Button, TextField, Typography } from "@mui/material";
 
-const CreateEvent = ({ eventDetails, setEventDetails }) => {
+const CreateEvent = () => {
   const navigate = useNavigate();
+  const { eventDetails, setEventDetails } = useContext(EventContext);
 
   const handleChange = (event) => {
     setEventDetails({
@@ -12,7 +15,7 @@ const CreateEvent = ({ eventDetails, setEventDetails }) => {
   };
 
   return (
-    <>
+    <Box sx={{ position: "absolute" }}>
       <Typography
         sx={{
           fontSize: "36px",
@@ -20,7 +23,7 @@ const CreateEvent = ({ eventDetails, setEventDetails }) => {
           color: "#240D57",
           lineHeight: "41px",
           mt: "60px",
-          mb: "20px",
+          bgcolor: "#ede5ff",
         }}
       >
         Create Event
@@ -29,89 +32,28 @@ const CreateEvent = ({ eventDetails, setEventDetails }) => {
         component="form"
         sx={{
           "& .MuiTextField-root": { m: 2, width: "80%" },
+          bgcolor: "#ede5ff",
         }}
       >
-        <TextField
-          required
-          variant="outlined"
-          label="Event Name"
-          name="eventName"
-          onChange={handleChange}
-        />
-        <TextField
-          required
-          variant="outlined"
-          label="Host Name"
-          name="hostName"
-          onChange={handleChange}
-        />
-        <TextField
-          required
-          variant="outlined"
-          label="Start Time"
-          name="startTime"
-          type="time"
-          onChange={handleChange}
-        />
-        <TextField
-          required
-          variant="outlined"
-          label="Start Date"
-          name="startDate"
-          type="date"
-          onChange={handleChange}
-        />
-        <TextField
-          required
-          variant="outlined"
-          label="End Time"
-          name="endTime"
-          type="time"
-          onChange={handleChange}
-        />
-        <TextField
-          required
-          variant="outlined"
-          label="End Date"
-          name="endDate"
-          type="date"
-          onChange={handleChange}
-        />
-        <TextField
-          required
-          variant="outlined"
-          label="street"
-          name="street"
-          onChange={handleChange}
-        />
-        <TextField
-          required
-          variant="outlined"
-          label="suburb"
-          name="suburb"
-          onChange={handleChange}
-        />
-        <TextField
-          required
-          variant="outlined"
-          label="state"
-          name="state"
-          onChange={handleChange}
-        />
-        <TextField
-          required
-          variant="outlined"
-          label="postcode"
-          name="postcode"
-          onChange={handleChange}
-        />
-        <TextField
-          required
-          variant="outlined"
-          label="Event Photo"
-          name="eventPhoto"
-          onChange={handleChange}
-        />
+        {Object.keys(eventDetails).map((key) => (
+          <TextField
+            key={key}
+            required
+            variant="outlined"
+            label={key}
+            name={key}
+            type={
+              key.includes("Time")
+                ? "time"
+                : key.includes("Date")
+                ? "date"
+                : "text"
+            }
+            InputLabelProps={{ shrink: true }}
+            value={eventDetails[key]}
+            onChange={handleChange}
+          />
+        ))}
       </Box>
       <Button
         variant="contained"
@@ -130,7 +72,7 @@ const CreateEvent = ({ eventDetails, setEventDetails }) => {
       >
         Next
       </Button>
-    </>
+    </Box>
   );
 };
 
