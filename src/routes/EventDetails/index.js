@@ -38,7 +38,7 @@ const EventDetails = ({ eventDetails }) => {
       </Typography>
       <Box sx={{ width: "100%", px: "14px" }}>
         <List>
-          <ListItem disablePadding>
+          <ListItem>
             <ListItemIcon sx={{ color: "#8456EC" }}>
               <ImCalendar />
             </ListItemIcon>
@@ -52,7 +52,7 @@ const EventDetails = ({ eventDetails }) => {
                     lineHeight: "18px",
                   }}
                 >
-                  {eventDetails.startTime}
+                  {eventDetails.startDate} {eventDetails.startTime}
                 </Typography>
               }
               secondary={
@@ -64,12 +64,12 @@ const EventDetails = ({ eventDetails }) => {
                     lineHeight: "16px",
                   }}
                 >
-                  to {eventDetails.endTime}
+                  to {eventDetails.endDate} {eventDetails.endTime}
                 </Typography>
               }
             />
           </ListItem>
-          <ListItem disablePadding>
+          <ListItem>
             <ListItemIcon sx={{ color: "#8456EC" }}>
               <ImLocation />
             </ListItemIcon>

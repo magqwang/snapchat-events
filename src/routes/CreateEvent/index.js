@@ -48,15 +48,33 @@ const CreateEvent = ({ eventDetails, setEventDetails }) => {
         <TextField
           required
           variant="outlined"
-          label="Start Time/Date"
+          label="Start Time"
           name="startTime"
+          type="time"
           onChange={handleChange}
         />
         <TextField
           required
           variant="outlined"
-          label="End Time/Date"
+          label="Start Date"
+          name="startDate"
+          type="date"
+          onChange={handleChange}
+        />
+        <TextField
+          required
+          variant="outlined"
+          label="End Time"
           name="endTime"
+          type="time"
+          onChange={handleChange}
+        />
+        <TextField
+          required
+          variant="outlined"
+          label="End Date"
+          name="endDate"
+          type="date"
           onChange={handleChange}
         />
         <TextField
