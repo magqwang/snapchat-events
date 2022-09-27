@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { EventContext } from "../../contexts/event.context";
 import { Box, Button, TextField, Typography } from "@mui/material";
 
-const CreateEvent = () => {
+const CreateEvent = ({ mediaType }) => {
   const navigate = useNavigate();
   const { eventDetails, setEventDetails } = useContext(EventContext);
 
@@ -30,7 +30,10 @@ const CreateEvent = () => {
       <form onSubmit={() => navigate("/event")}>
         <Box
           sx={{
-            "& .MuiTextField-root": { m: 2, width: "400px" },
+            "& .MuiTextField-root": {
+              m: 2,
+              width: mediaType === "laptop" ? "40%" : "75%",
+            },
           }}
         >
           {Object.keys(eventDetails).map((key) => (

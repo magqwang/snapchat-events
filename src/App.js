@@ -35,7 +35,7 @@ function App() {
     },
     {
       path: "/create",
-      element: <CreateEvent />,
+      element: <CreateEvent mediaType={mediaType} />,
     },
     {
       path: "/event",
