@@ -27,49 +27,50 @@ const CreateEvent = () => {
       >
         Create Event
       </Typography>
-      <Box
-        component="form"
-        sx={{
-          "& .MuiTextField-root": { m: 2, width: "80%" },
-        }}
-      >
-        {Object.keys(eventDetails).map((key) => (
-          <TextField
-            key={key}
-            required
-            variant="outlined"
-            label={key}
-            name={key}
-            type={
-              key.includes("Time")
-                ? "time"
-                : key.includes("Date")
-                ? "date"
-                : "text"
-            }
-            InputLabelProps={{ shrink: true }}
-            value={eventDetails[key]}
-            onChange={handleChange}
-          />
-        ))}
-      </Box>
-      <Button
-        variant="contained"
-        onClick={() => navigate("/event")}
-        sx={{
-          textTransform: "none",
-          backgroundImage:
-            "linear-gradient(90deg, #8456EC 3.25%, #E87BF8 100%);",
-          padding: "16px",
-          borderRadius: "10px",
-          fontSize: "16px",
-          width: "187px",
-          height: "50px",
-        }}
-        type="submit"
-      >
-        Next
-      </Button>
+      <form onSubmit={() => navigate("/event")}>
+        <Box
+          sx={{
+            "& .MuiTextField-root": { m: 2, width: "400px" },
+          }}
+        >
+          {Object.keys(eventDetails).map((key) => (
+            <TextField
+              key={key}
+              required
+              variant="outlined"
+              label={key}
+              name={key}
+              type={
+                key.includes("Time")
+                  ? "time"
+                  : key.includes("Date")
+                  ? "date"
+                  : "text"
+              }
+              InputLabelProps={{ shrink: true }}
+              value={eventDetails[key]}
+              onChange={handleChange}
+            />
+          ))}
+        </Box>
+        <Button
+          variant="contained"
+          sx={{
+            textTransform: "none",
+            backgroundImage:
+              "linear-gradient(90deg, #8456EC 3.25%, #E87BF8 100%);",
+            padding: "16px",
+            borderRadius: "10px",
+            fontSize: "16px",
+            width: "187px",
+            height: "50px",
+            mx: "auto",
+          }}
+          type="submit"
+        >
+          Next
+        </Button>
+      </form>
     </Box>
   );
 };
