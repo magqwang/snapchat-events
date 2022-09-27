@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: "Helvetica", sans-serif;
+  font-family: "Helvetica", "Inter", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -11,5 +11,5 @@ code {
 }
 
 html {
-  background-color: #ede5ff;
+  background-color: #f6f2ff;
 }

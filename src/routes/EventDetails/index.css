@@ -1,0 +1,16 @@
+.event-photo {
+  width: 500px;
+  align-self: center;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .event-photo {
+    max-width: 593px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .event-photo {
+    width: 100%;
+  }
+}

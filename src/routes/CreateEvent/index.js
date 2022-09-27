@@ -23,7 +23,6 @@ const CreateEvent = () => {
           color: "#240D57",
           lineHeight: "41px",
           mt: "60px",
-          bgcolor: "#ede5ff",
         }}
       >
         Create Event
@@ -32,7 +31,6 @@ const CreateEvent = () => {
         component="form"
         sx={{
           "& .MuiTextField-root": { m: 2, width: "80%" },
-          bgcolor: "#ede5ff",
         }}
       >
         {Object.keys(eventDetails).map((key) => (

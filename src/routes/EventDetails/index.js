@@ -3,7 +3,6 @@ import { useContext } from "react";
 import { EventContext } from "../../contexts/event.context";
 
 import {
-  Box,
   IconButton,
   List,
   ListItem,
@@ -16,48 +15,64 @@ import BirthdayCake from "../../assets/Birthday-cake.png";
 import { ImCalendar, ImLocation } from "react-icons/im";
 import { AiOutlineRight } from "react-icons/ai";
 
-const EventDetails = () => {
+import "./index.css";
+
+const EventDetails = ({ mediaType }) => {
   const navigate = useNavigate();
   const { eventDetails } = useContext(EventContext);
 
   return (
     <Stack
-      spacing={2}
+      spacing={mediaType === "laptop" ? 10 : 2}
+      direction={mediaType === "laptop" ? "row-reverse" : "column"}
       sx={{
-        textAlign: "left",
-        bgColor: "#dddddd",
+        justifyContent: mediaType === "laptop" && "space-around",
+        alignItems: mediaType === "laptop" ? "start" : "center",
         position: "absolute",
         left: 0,
         right: 0,
         top: 0,
+        mt: mediaType !== "mobile" && "88px",
+        mx: "auto",
+        width:
+          mediaType === "tablet"
+            ? "593px"
+            : mediaType === "laptop"
+            ? "500px"
+            : "100%",
       }}
     >
-      <img src={BirthdayCake} alt="event" style={{ width: "100%" }} />
-      <Typography
+      <img className="event-photo" src={BirthdayCake} alt="event" />
+      <Stack
+        spacing={2}
         sx={{
-          fontSize: "28px",
-          fontWeight: 700,
-          color: "#240D57",
-          lineHeight: "32px",
-          textAign: "left",
-          px: "20px",
+          width: "100%",
+          textAlign: "left",
+          px:
+            mediaType === "mobile" ? "20px" : mediaType === "tablet" && "50px",
         }}
       >
-        {eventDetails.eventName}
-      </Typography>
-      <Typography
-        sx={{
-          fontSize: "14px",
-          fontWeight: 700,
-          color: "#828282",
-          lineHeight: "16px",
-          textAign: "left",
-          px: "20px",
-        }}
-      >
-        Hosted by {eventDetails.hostName}
-      </Typography>
-      <Box sx={{ width: "100%", px: "34px" }}>
+        <Typography
+          sx={{
+            fontSize: "28px",
+            fontWeight: 700,
+            color: "#240D57",
+            lineHeight: "32px",
+            width: "333px",
+          }}
+        >
+          {eventDetails.eventName}
+        </Typography>
+        <Typography
+          sx={{
+            fontSize: "14px",
+            fontWeight: 700,
+            color: "#828282",
+            lineHeight: "16px",
+          }}
+        >
+          Hosted by {eventDetails.hostName}
+        </Typography>
         <List>
           <ListItem
             secondaryAction={
@@ -145,7 +160,7 @@ const EventDetails = () => {
             />
           </ListItem>
         </List>
-      </Box>
+      </Stack>
     </Stack>
   );
 };
