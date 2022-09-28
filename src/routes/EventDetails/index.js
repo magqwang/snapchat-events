@@ -21,6 +21,8 @@ const EventDetails = ({ mediaType }) => {
   const navigate = useNavigate();
   const { eventDetails } = useContext(EventContext);
 
+  console.log(eventDetails.StartTimeDate.toString());
+
   return (
     <Stack
       spacing={mediaType === "laptop" ? 10 : 2}
@@ -61,7 +63,7 @@ const EventDetails = ({ mediaType }) => {
             width: "333px",
           }}
         >
-          {eventDetails.eventName}
+          {eventDetails.EventName}
         </Typography>
         <Typography
           sx={{
@@ -71,7 +73,7 @@ const EventDetails = ({ mediaType }) => {
             lineHeight: "16px",
           }}
         >
-          Hosted by {eventDetails.hostName}
+          Hosted by {eventDetails.HostName}
         </Typography>
         <List>
           <ListItem
@@ -99,7 +101,7 @@ const EventDetails = ({ mediaType }) => {
                     lineHeight: "18px",
                   }}
                 >
-                  {eventDetails.startDate} {eventDetails.startTime}
+                  {eventDetails.StartTimeDate.toString()}
                 </Typography>
               }
               secondary={
@@ -111,7 +113,7 @@ const EventDetails = ({ mediaType }) => {
                     lineHeight: "16px",
                   }}
                 >
-                  to {eventDetails.endDate} {eventDetails.endTime}
+                  to {eventDetails.EndTimeDate.toString()}
                 </Typography>
               }
             />
@@ -141,7 +143,7 @@ const EventDetails = ({ mediaType }) => {
                     lineHeight: "18px",
                   }}
                 >
-                  {eventDetails.street}
+                  {eventDetails.Street}
                 </Typography>
               }
               secondary={
@@ -153,8 +155,8 @@ const EventDetails = ({ mediaType }) => {
                     lineHeight: "16px",
                   }}
                 >
-                  {eventDetails.suburb} {eventDetails.state}{" "}
-                  {eventDetails.postcode}
+                  {eventDetails.Suburb} {eventDetails.State}{" "}
+                  {eventDetails.Postcode}
                 </Typography>
               }
             />

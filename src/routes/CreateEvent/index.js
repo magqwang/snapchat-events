@@ -2,6 +2,9 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { EventContext } from "../../contexts/event.context";
 import { Box, Button, TextField, Typography } from "@mui/material";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 
 const CreateEvent = ({ mediaType }) => {
   const navigate = useNavigate();
@@ -27,7 +30,12 @@ const CreateEvent = ({ mediaType }) => {
       >
         Create Event
       </Typography>
-      <form onSubmit={() => navigate("/event")}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          navigate("/event");
+        }}
+      >
         <Box
           sx={{
             "& .MuiTextField-root": {
@@ -36,25 +44,41 @@ const CreateEvent = ({ mediaType }) => {
             },
           }}
         >
-          {Object.keys(eventDetails).map((key) => (
-            <TextField
-              key={key}
-              required
-              variant="outlined"
-              label={key}
-              name={key}
-              type={
-                key.includes("Time")
-                  ? "time"
-                  : key.includes("Date")
-                  ? "date"
-                  : "text"
-              }
-              InputLabelProps={{ shrink: true }}
-              value={eventDetails[key]}
-              onChange={handleChange}
-            />
-          ))}
+          {Object.keys(eventDetails).map((key) => {
+            if (!key.includes("Time")) {
+              return (
+                <TextField
+                  key={key}
+                  required
+                  variant="outlined"
+                  label={key}
+                  name={key}
+                  type="text"
+                  InputLabelProps={{ shrink: true }}
+                  value={eventDetails[key]}
+                  onChange={handleChange}
+                />
+              );
+            } else {
+              return (
+                <LocalizationProvider key={key} dateAdapter={AdapterDayjs}>
+                  <DateTimePicker
+                    renderInput={(props) => <TextField {...props} />}
+                    required
+                    label={key}
+                    name={key}
+                    value={eventDetails[key]}
+                    onChange={(newValue) =>
+                      setEventDetails({
+                        ...eventDetails,
+                        [key]: newValue,
+                      })
+                    }
+                  />
+                </LocalizationProvider>
+              );
+            }
+          })}
         </Box>
         <Button
           variant="contained"
